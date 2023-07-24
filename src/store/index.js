@@ -4,14 +4,16 @@ import storage from "redux-persist/lib/storage";
 
 import userSlice from "./user";
 import employeesSlice from "./employees";
+import logSlice from './log'
 
 const reducer = combineReducers({
   user: userSlice,
-  employees: employeesSlice
+  employees: employeesSlice,
+  log: logSlice
 });
 
 const persistConfig = {
-  key: "root1",
+  key: "root3",
   storage
 };
 

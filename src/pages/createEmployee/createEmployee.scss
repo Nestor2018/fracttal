@@ -1,0 +1,30 @@
+@use '../../sass/tokens/colors';
+@use '../../sass/mixins/mixins';
+@use '../../sass/tokens/spacing';
+
+.createAccount {
+  @include mixins.respond-to(spacing.$medium) {
+    @include mixins.max-width(80%);
+  }
+  padding: spacing.$space_x2;
+  text-align: center;
+  .createAccount-form {
+    margin: spacing.$space_x3 0;
+    @include mixins.respond-to(spacing.$medium) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: spacing.$space;
+    }
+  }
+  .createAccount-title {
+    text-align: center;
+    font-size: spacing.$title;
+    color: colors.$action-dark-blue;
+  }
+  & .button {
+    @include mixins.respond-to(spacing.$medium) {
+      width: 30%;
+      align-self: center;
+    }
+  }
+}

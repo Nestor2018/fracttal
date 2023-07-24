@@ -1,0 +1,29 @@
+@use '../../sass/tokens/colors';
+@use '../../sass/mixins/mixins';
+@use '../../sass/tokens/spacing';
+
+.log-container {
+  @include mixins.respond-to(spacing.$medium) {
+    @include mixins.max-width(80%);
+  }
+  padding: spacing.$space_x3;
+  .log-title {
+    text-align: center;
+    font-size: spacing.$title;
+    color: colors.$dark-blue;
+    margin-bottom: spacing.$space_x4;
+  }
+  .log-item {
+    padding: spacing.$space;
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    gap: spacing.$space;
+    margin: spacing.$space 0;
+    border: 1px solid colors.$blue;
+    color: colors.$dark_blue;
+    @include mixins.respond-to(spacing.$medium) {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 1fr;
+    }
+  }
+}

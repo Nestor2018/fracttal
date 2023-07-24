@@ -1,16 +1,20 @@
 @use '../../sass/tokens/colors';
-@use '../../sass/tokens/typography';
 @use '../../sass/tokens/spacing';
 @use '../../sass/mixins/mixins';
 
 .spiner {
   position: absolute;
+  margin: 50%;
   border: 4px solid rgba(0, 0, 0, 0.1);
   width: 36px;
   height: 36px;
   border-radius: 50%;
   border-left-color: colors.$dark-blue;
   animation: spin 1s linear infinite;
+  @include mixins.respond-to(spacing.$medium) {
+    margin: 50%;
+    margin-top: 20%;
+  }
 }
 
 @keyframes spin {

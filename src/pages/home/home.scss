@@ -1,0 +1,85 @@
+@use '../../sass/tokens/colors';
+@use '../../sass/mixins/mixins';
+@use '../../sass/tokens/spacing';
+
+.home-container {
+  @include mixins.respond-to(spacing.$medium) {
+    @include mixins.max-width(80%);
+  }
+  margin: auto;
+  text-align: center;
+  padding: spacing.$space_x2;
+  border-radius: spacing.$border_radius;
+  .home-title__page {
+    text-align: center;
+    font-size: spacing.$title;
+    color: colors.$action-dark-blue;
+  }
+  .home-container__employees {
+    margin: spacing.$space_x4 0;
+    .home-employee_header {
+      display: none;
+      border: 1px solid colors.$blue;
+      @include mixins.respond-to(spacing.$medium) {
+        display: grid;
+        grid-template-columns: 1fr 5fr 5fr 2fr;
+      }
+    }
+    .home-employee {
+      border: 1px solid colors.$blue;
+      display: grid;
+      grid-template-rows: repeat(5, 1fr);
+      align-items: center;
+      margin: spacing.$space;
+      @include mixins.respond-to(spacing.$medium) {
+        grid-template-columns: 1fr 5fr 5fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        margin: 0;
+      }
+      & strong {
+        @include mixins.respond-to(spacing.$medium) {
+          display: none;
+        }
+      }
+      & .button {
+        width: 90%;
+        padding: spacing.$space_half;
+        font-size: spacing.$subText;
+        margin-left: 5%;
+      }
+      .home-employee__id {
+        padding: spacing.$space spacing.$space_x2;
+        background-color: colors.$light_green;
+      }
+      .home-employee__name {
+        padding: spacing.$space spacing.$space_x2;
+        background-color: colors.$light_red;
+      }
+      .home-employee__description {
+        padding: spacing.$space spacing.$space_x2;
+        background-color: colors.$light_green;
+      }
+    }
+    .header {
+      font-weight: bold;
+      padding: spacing.$space spacing.$space_x2;
+      background-color: colors.$blue;
+      display: none;
+      @include mixins.respond-to(spacing.$medium) {
+        display: block;
+      }
+    }
+  }
+  .home-container_buttons {
+    @include mixins.respond-to(spacing.$medium) {
+      display: flex;
+      justify-content: space-around;
+    }
+    & button {
+      margin: spacing.$space 0;
+      @include mixins.respond-to(spacing.$medium) {
+        width: 30%;
+      }
+    }
+  }
+}

@@ -1,33 +1,120 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import Spinner from "../../components/spinner/Spinner";
-import { getEmployees } from "../../store/employees";
-import { logOut, signUp } from "../../store/user";
+import { getEmployees, deleteEmployee } from "../../store/employees";
+import { getIp } from "../../store/log";
+import { logOut } from "../../store/user";
+import { createLog } from "../../store/log";
+import "./home.scss";
+import Button from "../../components/button/Button";
+import { hour } from "../../utils/auth";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const employees2 = useSelector(state => state.employees.employees);
-  const employees = employees2.slice(1);
+  const navigate = useNavigate();
+  const employees = useSelector(state => state.employees.employees);
+  const user = useSelector(state => state.user.user);
+  const ip = useSelector(state => state.log.ip);
+
+  const statusGetEmployees = useSelector(
+    state => state.employees.statusGetEmployees
+  );
+
+  const statusDeleteEmployee = useSelector(
+    state => state.employees.statusDeleteEmployee
+  );
 
   const dologOut = () => {
     dispatch(logOut());
   };
 
+  const goDetail = employee => {
+    navigate("/detail", { state: employee });
+  };
+
+  const handleDeleteEmployee = id => {
+    dispatch(
+      deleteEmployee({
+        credentials: {
+          id
+        }
+      })
+    );
+
+    dispatch(
+      createLog({
+        credentials: {
+          user: user.email,
+          hour: hour(),
+          action: "delete",
+          ip
+        }
+      })
+    );
+  };
+
+  const createEmployee = () => {
+    navigate("/create");
+  };
+
+  const goLog = () => {
+    navigate("/log");
+  };
+
   useEffect(() => {
     dispatch(getEmployees());
+    dispatch(getIp());
   }, []);
+
+  useEffect(() => {
+    if (statusDeleteEmployee == "success") {
+      dispatch(getEmployees());
+    }
+  }, [statusDeleteEmployee]);
+
   return (
-    <div>
-      <Spinner />
-      {employees.map((employee, index) => (
-        <div key={index}>
-          <p>{employee.nombre}</p>
-          <p>{employee.descripcion}</p>
+    <div className="home-container">
+      {statusGetEmployees == "loading" && <Spinner />}
+      {statusDeleteEmployee == "loading" && <Spinner />}
+      <p className="home-title__page">Lista de empleados</p>
+      <div className="home-container__employees">
+        <div className="home-employee_header">
+          <p className="home-employee__id header">id</p>
+          <p className="home-employee__name header">Nombre</p>
+          <p className="home-employee__description header">
+            descripcion del cargo
+          </p>
         </div>
-      ))}
-      <button onClick={() => dologOut()}>cerrar sesion</button>
+        {employees &&
+          employees.map((employee, index) => (
+            <div key={index} className="home-employee">
+              <p className="home-employee__id">
+                <strong>id: </strong>
+                {employee?.id}
+              </p>
+              <p className="home-employee__name">
+                <strong>Nombre: </strong>
+                {employee?.nombre}
+              </p>
+              <p className="home-employee__description">
+                <strong>Descripción: </strong>
+                {employee?.descripcion}
+              </p>
+              <Button text="Detalles" click={() => goDetail(employee)} />
+              <Button
+                text="Eliminar"
+                click={() => handleDeleteEmployee(employee?.id)}
+              />
+            </div>
+          ))}
+      </div>
+      <div className="home-container_buttons">
+        <Button click={() => createEmployee()} text="Crear empleado" />
+        <Button click={() => dologOut()} text="cerrar sesión" />
+        <Button click={() => goLog()} text="Ver log" />
+      </div>
     </div>
   );
 };

@@ -1,12 +1,11 @@
-@use './tokens/typography';
 @use './tokens/colors';
 @use './tokens/spacing';
 @use './mixins/mixins';
 
 body,
 html {
+  margin: 0;
   height: 100%;
-  font-family: typography.$font;
   text-rendering: optimizeLegibility;
   -webkit-font-smooth: antialiased;
   color: colors.$black;
@@ -41,139 +40,11 @@ html {
     color: colors.$neutral-dark-gray;
     height: 37px !important;
   }
-  & .form-select_input {
-    & input {
-      color: colors.$neutral-dark-gray;
-      height: 23px !important;
-    }
-  }
-  .dropdown-toggle::after {
-    display: none !important;
-  }
-
-  .container-info {
-    & .dropdown {
-      top: -30px !important;
-      left: 50px;
-    }
-  }
 }
 
 .margin-page {
   margin-top: spacing.$space_x5;
   padding-bottom: spacing.$space_x5;
-  // wwidth: 100%;
-  //@include mixins.max-width();
-}
-
-.errorInput {
-  padding: spacing.$space_half;
-  color: colors.$red;
-}
-
-.container-checkbox {
-  display: flex;
-  justify-content: space-around;
-  & div {
-    display: flex;
-    width: 50px;
-    justify-content: space-between;
-  }
-  &.input {
-    border-radius: 50% !important;
-  }
-}
-
-.container-fechas {
-  display: flex;
-  justify-content: space-around;
-  & div {
-    width: 40%;
-  }
-}
-
-.container-two-input {
-  display: flex;
-  justify-content: space-between;
-  & :first-child {
-    width: 100%;
-    margin-right: 2%;
-  }
-  & input {
-    width: 100%;
-  }
-}
-
-.container-two-input_select {
-  display: flex;
-  justify-content: space-between;
-  & .form-select_input {
-    width: 100%;
-    margin-right: 2%;
-  }
-}
-
-.container-tree-input {
-  display: flex;
-  justify-content: space-between;
-  & div {
-    width: 95%;
-    & div {
-      & div {
-        max-width: 30px;
-      }
-      & div:first-child {
-        max-width: 90%;
-      }
-    }
-  }
-}
-
-.container-input_button {
-  display: flex;
-  & input {
-    width: 95%;
-  }
-}
-
-.button-geolocation {
-  display: flex;
-  justify-content: center;
-  @include mixins.buttonIcon(
-    colors.$action-blue,
-    colors.$midis_white,
-    colors.$action-blue
-  );
-}
-
-.indicativo {
-  margin-right: spacing.$space;
-  background-color: colors.$background-card;
-  border: 1px solid colors.$neutral-white;
-  padding: spacing.$space_half;
-  color: colors.$neutral-dark-gray;
-  height: 35px;
-  .btn {
-    padding: 0;
-  }
-}
-
-.css-qc6sy-singleValue {
-  color: colors.$neutral-dark-gray;
-}
-
-.form-select {
-  color: colors.$neutral-dark-gray;
-}
-
-.text-leader-branch_area {
-  font-size: 13px;
-  color: #7AA5C8;
-  margin-left: 5px;
-  align-self: center;
-}
-
-#map {
   width: 100%;
-  height: 100%;
+  @include mixins.max-width(800px);
 }

@@ -1,0 +1,17 @@
+@use '../../sass/tokens/colors';
+@use '../../sass/tokens/spacing';
+
+.input-container {
+  margin: spacing.$space 0;
+  padding: 0 spacing.$space_x2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: -webkit-fill-available;
+  position: relative;
+  border-radius: spacing.$big-border-radius;
+  border: 1px solid colors.$gray;
+  &:focus-visible {
+    outline: none;
+  }
+}

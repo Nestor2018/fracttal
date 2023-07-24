@@ -1,20 +1,29 @@
-import { Routes, Route, Navigate } from "react-router";
+import { Routes, Route } from "react-router";
 import { useSelector } from "react-redux";
 
 import Login from "../pages/login/Login";
 import Home from "../pages/home/Home";
+import CreateEmployee from "../pages/createEmployee/CreateEmployee";
+import DetailEmployee from "../pages/detailEmployee/DetailEmployee";
+import Log from "../pages/log/log";
 
 const AppRoutes = () => {
-  const isAuth = useSelector(state => state.user.user);
+  const user = useSelector(state => state.user.user);
   return (
-    <div>
-      <Routes>
-        <Route
-          path="/"
-          element={isAuth ? <Home /> : <Login />}
-        />
-      </Routes>
-    </div>
+    <>
+      {user ? (
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/create" element={<CreateEmployee />} />
+          <Route path="/detail" element={<DetailEmployee />} />
+          <Route path="/log" element={<Log />} />
+        </Routes>
+      ) : (
+        <Routes>
+          <Route path="/" element={<Login />} />
+        </Routes>
+      )}
+    </>
   );
 };
 

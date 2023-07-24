@@ -1,0 +1,51 @@
+@use '../../sass/tokens/colors';
+@use '../../sass/mixins/mixins';
+@use '../../sass/tokens/spacing';
+
+.login-container {
+  background-color: colors.$gray_login;
+  height: 100vh;
+  padding-top: 20%;
+  @include mixins.respond-to(spacing.$medium) {
+    padding-top: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  & img {
+    display: none;
+    @include mixins.respond-to(spacing.$medium) {
+      display: block;
+      width: 100%;
+      margin: auto;
+    }
+  }
+  .login-container__form {
+    width: 80%;
+    margin: auto;
+    background-color: colors.$complementary-green;
+    padding: spacing.$space_x2;
+    border-radius: spacing.$border_radius;
+    @include mixins.respond-to(spacing.$medium) {
+      width: 50%;
+      margin: auto;
+    }
+    .login-title__page {
+      text-align: center;
+      font-size: spacing.$title;
+      color: colors.$action-dark-blue;
+    }
+    .login-container__inputs {
+      margin: 20% 0;
+    }
+    & .button {
+      background-color: colors.$complementary-blue;
+      color: colors.$white;
+    }
+    .login-link{
+      text-decoration: underline;
+      text-align: center;
+      margin-bottom: spacing.$space;
+      color: colors.$white;
+    }
+  }
+}

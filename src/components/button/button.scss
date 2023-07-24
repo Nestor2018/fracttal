@@ -1,0 +1,12 @@
+@use '../../sass/tokens/colors';
+@use '../../sass/tokens/spacing';
+
+.button{
+  width: 100%;
+  padding: spacing.$space;
+  font-size: spacing.$text;
+  background-color: colors.$blue;
+  color: colors.$white; 
+  border: none;
+  border-radius: spacing.$circle-border-radius;
+}
